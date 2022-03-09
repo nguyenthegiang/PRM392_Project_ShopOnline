@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1006466550563",
+    "project_id": "prm392-shoponline",
+    "storage_bucket": "prm392-shoponline.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006466550563:android:b67990553237cfe2ec9a96",
+        "android_client_info": {
+          "package_name": "com.example.prm392_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1006466550563-3rf588fg8a26abi7j1vi23d19t0lod28.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTHEXAb3fKAel95xk21P-mh8FRAjT98Iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1006466550563-3rf588fg8a26abi7j1vi23d19t0lod28.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
