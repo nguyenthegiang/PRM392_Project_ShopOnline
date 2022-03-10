@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PRM392_Project">
         <activity
+            android:name=".ProductDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -20,11 +23,10 @@
         </activity>
         <activity
             android:name=".SignUpActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
