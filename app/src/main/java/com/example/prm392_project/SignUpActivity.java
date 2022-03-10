@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         //success: notify & go to Login Activity
                         Toast.makeText(SignUpActivity.this, "User registered", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(SignUpActivity.this, MainActivity.class);
+                        Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
                         startActivity(i);
                         //close this activity
                         finish();
@@ -75,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void btnLoginInsteadClick(View view) {
         //Change to MainActivity (Login)
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }
