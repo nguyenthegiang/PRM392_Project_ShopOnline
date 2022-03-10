@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +22,8 @@ public class SignUpActivity extends AppCompatActivity {
     EditText editTextEmail;
     EditText editTextPassword;
     EditText editTextConfirmPassword;
+    ProgressBar progressBar;
+    Button btnSignup;
 
     //Firebase
     FirebaseAuth mAuth;
@@ -33,11 +37,17 @@ public class SignUpActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail2);
         editTextPassword = findViewById(R.id.editTextPassword2);
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
+        progressBar = findViewById(R.id.progressBar);
+        btnSignup = findViewById(R.id.btnSignUp2);
 
         //create firebase
         mAuth = FirebaseAuth.getInstance();
     }
     public void btnSignUpClick(View view) {
+        //Show ProgressBar, disable button
+        progressBar.setVisibility(View.VISIBLE);
+        btnSignup.setEnabled(false);
+
         //Get data from editText
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -56,6 +66,10 @@ public class SignUpActivity extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    //Hide ProgressBar, show button
+                    progressBar.setVisibility(View.GONE);
+                    btnSignup.setEnabled(true);
+
                     //check result
                     if (task.isSuccessful()) {
                         //success: notify & go to Login Activity
