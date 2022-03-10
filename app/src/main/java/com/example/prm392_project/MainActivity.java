@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveToAddProduct(View view) {
-        
+        //Move to AddProductActivity
+        Intent intent = new Intent(this, AddProductActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
