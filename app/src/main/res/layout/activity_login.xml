@@ -30,7 +30,7 @@
             android:layout_height="43dp"
             android:backgroundTint="@android:color/transparent"
             android:lineSpacingExtra="16sp"
-            android:onClick="btnLoginInsteadClick"
+            android:onClick="btnSignUpInsteadClick"
             android:text="Sign up"
             android:textAllCaps="false"
             android:textColor="@color/darkGreen"
