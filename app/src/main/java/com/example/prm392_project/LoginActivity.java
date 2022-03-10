@@ -61,8 +61,8 @@ public class LoginActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         //get input values
-        String email = editTextEmail.getText().toString();
-        String password = editTextPassword.getText().toString();
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
 
         //Validation
         if (TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
