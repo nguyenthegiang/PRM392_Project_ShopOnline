@@ -66,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
                         finish();
                     } else {
                         //fail: notify
-                        Toast.makeText(SignUpActivity.this, "Fail to register user", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
