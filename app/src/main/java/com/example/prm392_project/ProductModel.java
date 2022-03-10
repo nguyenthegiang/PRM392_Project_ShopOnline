@@ -6,12 +6,14 @@ import android.os.Parcelable;
 //Store a Product
 public class ProductModel implements Parcelable {
     //fields
+    private String id;
     private String name;
     private int price;
     private String description;
     private String imageURL;
 
     protected ProductModel(Parcel in) {
+        id = in.readString();
         name = in.readString();
         price = in.readInt();
         description = in.readString();
@@ -37,6 +39,7 @@ public class ProductModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeString(name);
         dest.writeInt(price);
         dest.writeString(description);
@@ -47,7 +50,8 @@ public class ProductModel implements Parcelable {
     public ProductModel() {
     }
 
-    public ProductModel(String name, int price, String description, String imageURL) {
+    public ProductModel(String id, String name, int price, String description, String imageURL) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
