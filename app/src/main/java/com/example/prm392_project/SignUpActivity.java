@@ -39,9 +39,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
     public void btnSignUpClick(View view) {
         //Get data from editText
-        String email = editTextEmail.getText().toString();
-        String password = editTextPassword.getText().toString();
-        String confirmPassword = editTextConfirmPassword.getText().toString();
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+        String confirmPassword = editTextConfirmPassword.getText().toString().trim();
 
         //Check value empty
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
