@@ -8,12 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -23,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -151,6 +156,28 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
     private void displayBottomSheet(ProductModel productModel) {
         //create bottom sheet dialog from themes.xml
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialogTheme);
+        //set layout for bottom sheet
+        View layout = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_layout, homeRL);
+        bottomSheetDialog.setContentView(layout);
+        //set cancelable: when touch outside the sheet
+        bottomSheetDialog.setCancelable(false);
+        bottomSheetDialog.setCanceledOnTouchOutside(true);
+        //display sheet
+        bottomSheetDialog.show();
+
+        //set data to Views in sheet
+        TextView productNameTV = layout.findViewById(R.id.TVProductName);
+        TextView productDescriptionTV = layout.findViewById(R.id.TVProductDescription);
+        TextView productPriceTV = layout.findViewById(R.id.TVProductPrice);
+        ImageView productImageIV = layout.findViewById(R.id.IVProductImage);
+        productNameTV.setText(productModel.getName());
+        productDescriptionTV.setText(productModel.getDescription());
+        productPriceTV.setText("$ " + productModel.getPrice());
+        Picasso.get().load(productModel.getImageURL()).into(productImageIV);
+
+        //set event for buttons
+        Button viewDetailBtn = layout.findViewById(R.id.btnViewDetail);
+        Button editBtn = layout.findViewById(R.id.btnEditProduct);
     }
 
     //--------------------------Delete this Later--------------------------
