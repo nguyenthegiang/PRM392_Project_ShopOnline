@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -148,7 +149,8 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
 
     //Display the Bottom Sheet that shows Product Detail when select 1 item in recycler view
     private void displayBottomSheet(ProductModel productModel) {
-        
+        //create bottom sheet dialog from themes.xml
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialogTheme);
     }
 
     //--------------------------Delete this Later--------------------------
