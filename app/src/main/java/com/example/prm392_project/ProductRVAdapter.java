@@ -41,6 +41,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     }
 
     //Bind data from ArrayList to RecyclerView
+    //There's a red line here but it's NOT a fault, so don't change it
     @Override
     public void onBindViewHolder(@NonNull ProductRVAdapter.ViewHolder holder, int position) {
         //set data to recycler view item
