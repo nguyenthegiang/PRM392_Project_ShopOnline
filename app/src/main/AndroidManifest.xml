@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PRM392_Project">
         <activity
+            android:name=".EditProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddProductActivity"
             android:exported="false" />
         <activity
