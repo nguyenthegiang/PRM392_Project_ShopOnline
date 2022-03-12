@@ -47,7 +47,7 @@ public class EditProductActivity extends AppCompatActivity {
         //set data of chosen product to editText
         if (productModel != null) {
             editTextName.setText(productModel.getName());
-            editTextPrice.setText(productModel.getPriceString());
+            editTextPrice.setText(String.valueOf(productModel.getPrice()));
             editTextDescription.setText(productModel.getDescription());
             editTextImageURL.setText(productModel.getImageURL());
             productID = productModel.getId();

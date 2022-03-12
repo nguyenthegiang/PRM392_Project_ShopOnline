@@ -97,9 +97,4 @@ public class ProductModel implements Parcelable {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
-
-    //For Edit Product
-    public String getPriceString() {
-        return String.valueOf(price);
-    }
 }
