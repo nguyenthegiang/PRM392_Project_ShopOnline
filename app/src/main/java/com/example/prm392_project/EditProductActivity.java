@@ -1,13 +1,23 @@
 package com.example.prm392_project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditProductActivity extends AppCompatActivity {
     //Views
@@ -49,4 +59,43 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
     //Event click [Update] button
+    public void onUpdateClick(View view) {
+        //show loading
+        loadingPB.setVisibility(View.VISIBLE);
+
+        //get input data
+        String productName = editTextName.getText().toString();
+        String productPrice = editTextPrice.getText().toString();
+        String productDescription = editTextDescription.getText().toString();
+        String productImageURL = editTextImageURL.getText().toString();
+        //create a map for passing data to DB using key & value pair
+        Map<String, Object> map = new HashMap<>();
+        map.put("description", productDescription);
+        map.put("imageURL", productImageURL);
+        map.put("name", productName);
+        map.put("price", productPrice);
+
+        //update value to Database
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //update
+                databaseReference.updateChildren(map);
+                //notify
+                Toast.makeText(EditProductActivity.this, "Product updated", Toast.LENGTH_SHORT).show();
+                //move to mainActivity
+                Intent intent = new Intent(EditProductActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //notify: fail
+                Toast.makeText(EditProductActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //Event click [Delete] button
+    
 }
