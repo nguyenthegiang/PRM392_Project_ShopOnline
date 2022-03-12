@@ -71,6 +71,7 @@ public class AddProductActivity extends AppCompatActivity {
                 //back to main activity
                 Intent intent = new Intent(AddProductActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
 
             @Override

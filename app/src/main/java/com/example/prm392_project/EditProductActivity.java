@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -40,6 +41,10 @@ public class EditProductActivity extends AppCompatActivity {
         editTextDescription = findViewById(R.id.editTextDescriptionEdit);
         editTextImageURL = findViewById(R.id.editTextImageURLEdit);
         loadingPB = findViewById(R.id.progressBarEditProduct);
+        Button btnUpdate = findViewById(R.id.btnUpdateProduct);
+        Button btnDelete = findViewById(R.id.btnDeleteProduct);
+        //firebase
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         //get the model passed from MainActivity
         productModel = getIntent().getParcelableExtra("product");
@@ -55,53 +60,63 @@ public class EditProductActivity extends AppCompatActivity {
 
         //get database reference to the chosen product
         databaseReference = firebaseDatabase.getReference("Products").child(productID);
-    }
 
-    //Event click [Update] button
-    public void onUpdateClick(View view) {
-        //show loading
-        loadingPB.setVisibility(View.VISIBLE);
-
-        //get input data
-        String productName = editTextName.getText().toString();
-        String productPrice = editTextPrice.getText().toString();
-        String productDescription = editTextDescription.getText().toString();
-        String productImageURL = editTextImageURL.getText().toString();
-        //create a map for passing data to DB using key & value pair
-        Map<String, Object> map = new HashMap<>();
-        map.put("description", productDescription);
-        map.put("imageURL", productImageURL);
-        map.put("name", productName);
-        map.put("price", productPrice);
-
-        //update value to Database
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        //Event click [Update] button
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //hide loading
-                loadingPB.setVisibility(View.INVISIBLE);
-                //update
-                databaseReference.updateChildren(map);
-                //notify
-                Toast.makeText(EditProductActivity.this, "Product updated", Toast.LENGTH_SHORT).show();
-                //move to mainActivity
-                Intent intent = new Intent(EditProductActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
+            public void onClick(View v) {
+                //show loading
+                loadingPB.setVisibility(View.VISIBLE);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                //notify: fail
-                Toast.makeText(EditProductActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                //hide loading
-                loadingPB.setVisibility(View.INVISIBLE);
+                //get input data
+                String productName = editTextName.getText().toString();
+                String productPrice = editTextPrice.getText().toString();
+                String productDescription = editTextDescription.getText().toString();
+                String productImageURL = editTextImageURL.getText().toString();
+                //create a map for passing data to DB using key & value pair
+                Map<String, Object> map = new HashMap<>();
+                map.put("id", productID);
+                map.put("name", productName);
+                map.put("price", productPrice);
+                map.put("description", productDescription);
+                map.put("imageURL", productImageURL);
+
+                //update value to Database
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //hide loading
+                        loadingPB.setVisibility(View.INVISIBLE);
+                        //update
+                        databaseReference.updateChildren(map);
+                        //notify
+                        Toast.makeText(EditProductActivity.this, "Product updated", Toast.LENGTH_SHORT).show();
+                        //move to mainActivity
+                        startActivity(new Intent(EditProductActivity.this, MainActivity.class));
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        //notify: fail
+                        Toast.makeText(EditProductActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        //hide loading
+                        loadingPB.setVisibility(View.INVISIBLE);
+                    }
+                });
             }
         });
 
+        //Event click [Delete] button
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteProduct();
+            }
+        });
     }
 
-    //Event click [Delete] button
-    public void onDeleteClick(View view) {
+    private void deleteProduct() {
         //delete in DB
         databaseReference.removeValue();
         //notify
