@@ -193,7 +193,11 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
         viewDetailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo: go to product detail activity
+                //go to product detail activity
+                Intent intent = new Intent(MainActivity.this, ProductDetailActivity.class);
+                //pass the chosen product
+                intent.putExtra("product", productModel);
+                startActivity(intent);
             }
         });
     }
