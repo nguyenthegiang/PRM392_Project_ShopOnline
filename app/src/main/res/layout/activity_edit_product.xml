@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.113" />
 
     <EditText
-        android:id="@+id/editTextName"
+        android:id="@+id/editTextNameEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.275" />
 
     <EditText
-        android:id="@+id/editTextImageURL"
+        android:id="@+id/editTextImageURLEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.756" />
 
     <EditText
-        android:id="@+id/editTextPrice"
+        android:id="@+id/editTextPriceEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -61,7 +61,7 @@
         app:layout_constraintVertical_bias="0.402" />
 
     <EditText
-        android:id="@+id/editTextDescription"
+        android:id="@+id/editTextDescriptionEdit"
         android:layout_width="209dp"
         android:layout_height="104dp"
         android:ems="10"
@@ -117,7 +117,7 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progressBarAddProduct"
+        android:id="@+id/progressBarEditProduct"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
