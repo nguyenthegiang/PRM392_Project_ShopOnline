@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,12 +62,32 @@ public class AddProductActivity extends AppCompatActivity {
         productId = name;
         //create a model
         ProductModel product = new ProductModel(productId, name, price, description, imageURL);
+
         //call add value event -> pass data to firebase database
-        databaseReference.addValueEventListener(new ValueEventListener() {
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                //set data to firebase
+//                databaseReference.child(productId).setValue(product);
+//                //notify
+//                Toast.makeText(AddProductActivity.this, "Product added successfully", Toast.LENGTH_SHORT).show();
+//                //back to main activity
+//                Intent intent = new Intent(AddProductActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                //fail: notify
+//                Toast.makeText(AddProductActivity.this, "Fail to add Product: " + error, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        //Add to Database (no Bug)
+        databaseReference.child(productId).setValue(product).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //set data to firebase
-                databaseReference.child(productId).setValue(product);
+            public void onSuccess(Void unused) {
                 //notify
                 Toast.makeText(AddProductActivity.this, "Product added successfully", Toast.LENGTH_SHORT).show();
                 //back to main activity
@@ -73,13 +95,15 @@ public class AddProductActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onFailure(@NonNull Exception e) {
                 //fail: notify
-                Toast.makeText(AddProductActivity.this, "Fail to add Product: " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddProductActivity.this, "Fail to add Product: " + e.getMessage(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
+
         //hide loading
         progressBar.setVisibility(View.INVISIBLE);
     }

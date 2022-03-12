@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -70,9 +72,10 @@ public class EditProductActivity extends AppCompatActivity {
 
                 //get input data
                 String productName = editTextName.getText().toString();
-                String productPrice = editTextPrice.getText().toString();
+                int productPrice = Integer.parseInt(editTextPrice.getText().toString());
                 String productDescription = editTextDescription.getText().toString();
                 String productImageURL = editTextImageURL.getText().toString();
+
                 //create a map for passing data to DB using key & value pair
                 Map<String, Object> map = new HashMap<>();
                 map.put("id", productID);
@@ -82,28 +85,54 @@ public class EditProductActivity extends AppCompatActivity {
                 map.put("imageURL", productImageURL);
 
                 //update value to Database
-                databaseReference.addValueEventListener(new ValueEventListener() {
+//                databaseReference.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        //hide loading
+//                        loadingPB.setVisibility(View.INVISIBLE);
+//                        //update
+//                        databaseReference.updateChildren(map);
+//                        //notify
+//                        Toast.makeText(EditProductActivity.this, "Product updated", Toast.LENGTH_SHORT).show();
+//                        //move to mainActivity
+//                        startActivity(new Intent(EditProductActivity.this, MainActivity.class));
+//                        finish();
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//                        //notify: fail
+//                        Toast.makeText(EditProductActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+//                        //hide loading
+//                        loadingPB.setVisibility(View.INVISIBLE);
+//                    }
+//                });
+
+                //Update Value to Database (no Bug)
+                //hide loading
+                loadingPB.setVisibility(View.INVISIBLE);
+                databaseReference.updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    //Success
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //hide loading
-                        loadingPB.setVisibility(View.INVISIBLE);
-                        //update
-                        databaseReference.updateChildren(map);
+                    public void onSuccess(Void unused) {
                         //notify
                         Toast.makeText(EditProductActivity.this, "Product updated", Toast.LENGTH_SHORT).show();
                         //move to mainActivity
                         startActivity(new Intent(EditProductActivity.this, MainActivity.class));
                         finish();
                     }
-
+                }).addOnFailureListener(new OnFailureListener() {
+                    //Fail
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                    public void onFailure(@NonNull Exception e) {
                         //notify: fail
-                        Toast.makeText(EditProductActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProductActivity.this, "Fail to update product: " + e.getMessage(),
+                                Toast.LENGTH_SHORT).show();
                         //hide loading
                         loadingPB.setVisibility(View.INVISIBLE);
                     }
                 });
+
             }
         });
 
