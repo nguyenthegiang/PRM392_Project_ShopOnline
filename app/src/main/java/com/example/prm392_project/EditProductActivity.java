@@ -30,7 +30,6 @@ public class EditProductActivity extends AppCompatActivity {
     ProductModel productModel;
     private String productID;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +47,7 @@ public class EditProductActivity extends AppCompatActivity {
         //set data of chosen product to editText
         if (productModel != null) {
             editTextName.setText(productModel.getName());
-            editTextPrice.setText(productModel.getPrice());
+            editTextPrice.setText(productModel.getPriceString());
             editTextDescription.setText(productModel.getDescription());
             editTextImageURL.setText(productModel.getImageURL());
             productID = productModel.getId();
