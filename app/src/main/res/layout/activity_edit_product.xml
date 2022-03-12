@@ -97,8 +97,9 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button"
+            android:onClick="onUpdateClick"
             android:text="Update"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
         <!--Button for Delete Product-->
         <Button
@@ -111,8 +112,9 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button"
+            android:onClick="onDeleteClick"
             android:text="Delete"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

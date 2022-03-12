@@ -79,6 +79,8 @@ public class EditProductActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //hide loading
+                loadingPB.setVisibility(View.INVISIBLE);
                 //update
                 databaseReference.updateChildren(map);
                 //notify
@@ -92,10 +94,21 @@ public class EditProductActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 //notify: fail
                 Toast.makeText(EditProductActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                //hide loading
+                loadingPB.setVisibility(View.INVISIBLE);
             }
         });
+
     }
 
     //Event click [Delete] button
-    
+    public void onDeleteClick(View view) {
+        //delete in DB
+        databaseReference.removeValue();
+        //notify
+        Toast.makeText(this, "Product deleted", Toast.LENGTH_SHORT).show();
+        //move to mainActivity
+        Intent intent = new Intent(EditProductActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
 }
