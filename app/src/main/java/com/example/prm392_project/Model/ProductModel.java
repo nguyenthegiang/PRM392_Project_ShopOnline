@@ -1,4 +1,4 @@
-package com.example.prm392_project;
+package com.example.prm392_project.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

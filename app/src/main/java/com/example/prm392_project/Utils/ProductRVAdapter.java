@@ -1,4 +1,4 @@
-package com.example.prm392_project;
+package com.example.prm392_project.Utils;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,9 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.prm392_project.Model.ProductModel;
+import com.example.prm392_project.R;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
