@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
         //create bottom sheet dialog from themes.xml
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialogTheme);
         //set layout for bottom sheet
-        View layout = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_layout, homeRL);
+        View layout = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_layout, homeRL, false);
         bottomSheetDialog.setContentView(layout);
         //set cancelable: when touch outside the sheet
         bottomSheetDialog.setCancelable(false);
