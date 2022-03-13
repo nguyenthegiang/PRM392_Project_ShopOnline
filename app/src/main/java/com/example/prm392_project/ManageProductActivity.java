@@ -141,10 +141,14 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
 
             //Shop -> do nothing
             case R.id.menuShop: {
+                //move to MainActivity
+                Intent i = new Intent(ManageProductActivity.this, MainActivity.class);
+                startActivity(i);
+                this.finish();
                 return true;
             }
 
-            //Manage Product -> go to ManageProduct Activity
+            //Manage Product -> do nothing
             case R.id.menuManageProduct: {
                 return true;
             }
