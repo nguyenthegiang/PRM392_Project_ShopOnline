@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +36,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements ProductRVAdapter.ProductClickInterface{
     //Firebase
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    DatabaseReference productReference;
+    DatabaseReference cartReference;
     private FirebaseAuth mAuth;
     //Views
     private RecyclerView RVProduct;
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
     //for list product
     private ArrayList<ProductModel> productModelArrayList;
     private ProductRVAdapter productRVAdapter;
+    //for add to cart
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
         firebaseDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         //get reference to DB
-        databaseReference = firebaseDatabase.getReference("Products");
+        productReference = firebaseDatabase.getReference("Products");   //for show product list
+        cartReference = firebaseDatabase.getReference("Carts");     //for add to cart
         //for product list
         productModelArrayList = new ArrayList<>();
         //for recycler view
@@ -70,12 +75,22 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
         getProducts();
     }
 
+    @Override
+    protected void onStart() {
+        //get id of current user, for add to cart
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            userId = user.getUid();
+        }
+        super.onStart();
+    }
+
     //fetch products data from DB
     private void getProducts() {
         //clear list
         productModelArrayList.clear();
         //read data from DB
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        productReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 //hide progress bar
@@ -204,7 +219,8 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
         addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo: go to ViewCart activity
+                //todo: add product to Cart (amount = 1, default)
+
             }
         });
 
