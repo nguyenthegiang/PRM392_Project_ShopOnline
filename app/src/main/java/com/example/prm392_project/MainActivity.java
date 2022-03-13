@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 //hide progress bar
                 loadingPB.setVisibility(View.GONE);
-                //read data to list
+                //read data to list: all Products
                 productModelArrayList.add(snapshot.getValue(ProductModel.class));
                 //notify adapter
                 productRVAdapter.notifyDataSetChanged();
@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
                 this.finish();
                 return true;
             }
+
             default: {
                 return super.onOptionsItemSelected(item);
             }
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
         //create bottom sheet dialog from themes.xml
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialogTheme);
         //set layout for bottom sheet: no attachToRoot to prevent bug [can't open BottomSheet in ManageProductActivity]
-        View layout = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_layout, homeRL, false);
+        View layout = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_main_layout, homeRL, false);
         bottomSheetDialog.setContentView(layout);
         //set cancelable: when touch outside the sheet
         bottomSheetDialog.setCancelable(false);
@@ -186,19 +187,20 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
         bottomSheetDialog.show();
 
         //set data to Views in sheet
-        TextView productNameTV = layout.findViewById(R.id.TVProductName);
-        TextView productDescriptionTV = layout.findViewById(R.id.TVProductDescription);
-        TextView productPriceTV = layout.findViewById(R.id.TVProductPrice);
-        ImageView productImageIV = layout.findViewById(R.id.IVProductImage);
+        TextView productNameTV = layout.findViewById(R.id.TVProductNameMain);
+        TextView productDescriptionTV = layout.findViewById(R.id.TVProductDescriptionMain);
+        TextView productPriceTV = layout.findViewById(R.id.TVProductPriceMain);
+        ImageView productImageIV = layout.findViewById(R.id.IVProductImageMain);
         productNameTV.setText(productModel.getName());
         productDescriptionTV.setText(productModel.getDescription());
         productPriceTV.setText("$ " + productModel.getPrice());
         Picasso.get().load(productModel.getImageURL()).into(productImageIV);
 
         //set event for buttons
-        Button viewDetailBtn = layout.findViewById(R.id.btnViewDetail);
-        Button editBtn = layout.findViewById(R.id.btnEditProduct);
+        Button viewDetailBtn = layout.findViewById(R.id.btnViewDetailMain);
+        Button editBtn = layout.findViewById(R.id.btnEditProductMain);
 
+        //Edit product
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -210,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
             }
         });
 
+        //View Product Detail
         viewDetailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

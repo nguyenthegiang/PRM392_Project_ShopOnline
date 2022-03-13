@@ -183,6 +183,7 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
                 this.finish();
                 return true;
             }
+
             default: {
                 return super.onOptionsItemSelected(item);
             }
