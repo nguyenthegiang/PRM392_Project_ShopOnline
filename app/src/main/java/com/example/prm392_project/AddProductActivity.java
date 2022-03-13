@@ -33,7 +33,7 @@ public class AddProductActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
 
     String productId;
-    String userId;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

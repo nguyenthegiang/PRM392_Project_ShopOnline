@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +44,8 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
     //for list product
     private ArrayList<ProductModel> productModelArrayList;
     private ProductRVAdapter productRVAdapter;
+
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,16 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
         getProducts();
     }
 
+    @Override
+    protected void onStart() {
+        //get id of current user
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            userId = user.getUid();
+        }
+        super.onStart();
+    }
+
     //fetch products data from DB
     private void getProducts() {
         //clear list
@@ -79,8 +92,13 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 //hide progress bar
                 loadingPB.setVisibility(View.GONE);
-                //read data to list
-                productModelArrayList.add(snapshot.getValue(ProductModel.class));
+
+                //read data to list: only get Products that has Seller is this User
+                ProductModel product = snapshot.getValue(ProductModel.class);
+                if (product.getSellerId().equals(userId)) {
+                    productModelArrayList.add(product);
+                }
+
                 //notify adapter
                 productRVAdapter.notifyDataSetChanged();
             }
