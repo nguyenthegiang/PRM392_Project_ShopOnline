@@ -11,6 +11,20 @@ public class ProductModel implements Parcelable {
     private int price;
     private String description;
     private String imageURL;
+    private String sellerId;
+
+    //getter, setter, constructor
+    public ProductModel() {
+    }
+
+    public ProductModel(String id, String name, int price, String description, String imageURL, String sellerId) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.imageURL = imageURL;
+        this.sellerId = sellerId;
+    }
 
     protected ProductModel(Parcel in) {
         id = in.readString();
@@ -18,6 +32,7 @@ public class ProductModel implements Parcelable {
         price = in.readInt();
         description = in.readString();
         imageURL = in.readString();
+        sellerId = in.readString();
     }
 
     public static final Creator<ProductModel> CREATOR = new Creator<ProductModel>() {
@@ -31,32 +46,6 @@ public class ProductModel implements Parcelable {
             return new ProductModel[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(name);
-        dest.writeInt(price);
-        dest.writeString(description);
-        dest.writeString(imageURL);
-    }
-
-    //getter, setter, constructor
-    public ProductModel() {
-    }
-
-    public ProductModel(String id, String name, int price, String description, String imageURL) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.imageURL = imageURL;
-    }
 
     public String getId() {
         return id;
@@ -96,5 +85,28 @@ public class ProductModel implements Parcelable {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeInt(price);
+        dest.writeString(description);
+        dest.writeString(imageURL);
+        dest.writeString(sellerId);
     }
 }
