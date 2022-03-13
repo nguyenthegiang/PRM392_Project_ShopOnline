@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +30,10 @@ public class AddProductActivity extends AppCompatActivity {
     //Firebase
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    FirebaseAuth mAuth;
 
     String productId;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,7 @@ public class AddProductActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
 
         //Firebase
+        mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Products");
     }
@@ -62,8 +67,13 @@ public class AddProductActivity extends AppCompatActivity {
         String imageURL = editTextImageURL.getText().toString().trim();
         //id generated from name
         productId = name;
+        //SellerID is id of the current user
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            userId = user.getUid();
+        }
         //create a model
-        ProductModel product = new ProductModel(productId, name, price, description, imageURL, "");
+        ProductModel product = new ProductModel(productId, name, price, description, imageURL, userId);
 
         //call add value event -> pass data to firebase database
 //        databaseReference.addValueEventListener(new ValueEventListener() {
