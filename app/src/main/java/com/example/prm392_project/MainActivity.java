@@ -135,8 +135,23 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+            //ShowCart -> go to ViewCart Activity
+            case R.id.menuShowCart: {
+                return true;
+            }
+
+            //Shop -> do nothing
+            case R.id.menuShop: {
+                return true;
+            }
+
+            //Manage Product -> go to ManageProduct Activity
+            case R.id.menuManageProduct: {
+                return true;
+            }
+
             //Log out
-            case R.id.logOut: {
+            case R.id.menuLogOut: {
                 //notify
                 Toast.makeText(getApplicationContext(), "Logged out", Toast.LENGTH_SHORT).show();
                 //log out in server
