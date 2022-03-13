@@ -122,6 +122,14 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
         displayBottomSheet(productModelArrayList.get(position));
     }
 
+    //Create the Appbar menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Create menu (appbar) from layout
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     //click listener for Appbar (Action Bar)
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -143,13 +151,6 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
                 return super.onOptionsItemSelected(item);
             }
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Create menu (appbar) from layout
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     //Display the Bottom Sheet that shows Product Detail when select 1 item in recycler view
