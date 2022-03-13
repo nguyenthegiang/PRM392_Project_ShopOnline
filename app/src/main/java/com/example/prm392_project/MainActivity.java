@@ -221,11 +221,4 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
             }
         });
     }
-
-    //--------------------------Delete this Later--------------------------
-    public void moveToAddProduct(View view) {
-        //Move to AddProductActivity
-        Intent intent = new Intent(this, AddProductActivity.class);
-        startActivity(intent);
-    }
 }
