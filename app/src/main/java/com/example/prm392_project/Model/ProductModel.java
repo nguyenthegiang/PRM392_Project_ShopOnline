@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 //Store a Product
+//Implement Parcelable for performing CRUD actions with DB
 public class ProductModel implements Parcelable {
     //fields
     private String id;
