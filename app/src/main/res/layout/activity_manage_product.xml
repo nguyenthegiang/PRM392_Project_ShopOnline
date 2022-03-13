@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/idRLHome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManageProductActivity">
+
+    <!--recycler view for product list-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RVProductList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/product_item" />
+
+    <!--progress bar for loading indicator-->
+    <ProgressBar
+        android:id="@+id/progressBarMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"/>
+
+    <!--Add button-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="moveToAddProduct"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+</RelativeLayout>
