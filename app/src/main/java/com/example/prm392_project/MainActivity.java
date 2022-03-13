@@ -147,6 +147,10 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
 
             //Manage Product -> go to ManageProduct Activity
             case R.id.menuManageProduct: {
+                //move to ManageProduct Activity
+                Intent i = new Intent(MainActivity.this, ManageProductActivity.class);
+                startActivity(i);
+                this.finish();
                 return true;
             }
 
