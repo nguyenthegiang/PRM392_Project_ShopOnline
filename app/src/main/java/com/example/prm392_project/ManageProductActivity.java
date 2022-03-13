@@ -39,7 +39,7 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
     //Views
     private RecyclerView RVProduct;
     private ProgressBar loadingPB;
-    private RelativeLayout homeRL;
+    private RelativeLayout RLManageProduct;
     //for list product
     private ArrayList<ProductModel> productModelArrayList;
     private ProductRVAdapter productRVAdapter;
@@ -50,9 +50,9 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
         setContentView(R.layout.activity_manage_product);
 
         //get Views
-        RVProduct = findViewById(R.id.RVProductList);
-        homeRL = findViewById(R.id.RLBottomSheet);
-        loadingPB = findViewById(R.id.progressBarMain);
+        RVProduct = findViewById(R.id.RVManageProductList);
+        RLManageProduct = findViewById(R.id.RLManageProduct);
+        loadingPB = findViewById(R.id.progressBarManageProduct);
         //firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -176,7 +176,7 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
         //create bottom sheet dialog from themes.xml
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialogTheme);
         //set layout for bottom sheet
-        View layout = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_layout, homeRL);
+        View layout = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_layout, RLManageProduct);
         bottomSheetDialog.setContentView(layout);
         //set cancelable: when touch outside the sheet
         bottomSheetDialog.setCancelable(false);

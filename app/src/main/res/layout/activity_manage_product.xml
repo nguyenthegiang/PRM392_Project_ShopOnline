@@ -2,21 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/idRLHome"
+    android:id="@+id/RLManageProduct"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ManageProductActivity">
 
     <!--recycler view for product list-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RVProductList"
+        android:id="@+id/RVManageProductList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/product_item" />
 
     <!--progress bar for loading indicator-->
     <ProgressBar
-        android:id="@+id/progressBarMain"
+        android:id="@+id/progressBarManageProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
