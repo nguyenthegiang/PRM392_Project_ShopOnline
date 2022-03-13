@@ -63,7 +63,7 @@ public class AddProductActivity extends AppCompatActivity {
         //id generated from name
         productId = name;
         //create a model
-        ProductModel product = new ProductModel(productId, name, price, description, imageURL);
+        ProductModel product = new ProductModel(productId, name, price, description, imageURL, "");
 
         //call add value event -> pass data to firebase database
 //        databaseReference.addValueEventListener(new ValueEventListener() {
