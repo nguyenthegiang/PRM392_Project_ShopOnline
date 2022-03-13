@@ -62,14 +62,14 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-        <!--Button for Edit Product-->
+        <!--Button for Add Product to Cart-->
         <Button
-            android:id="@+id/btnEditProductMain"
+            android:id="@+id/btnAddToCartMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:layout_weight="1"
-            android:text="Edit Product"
+            android:text="Add to Cart"
             android:textAllCaps="false"/>
 
         <!--Button for Product Detail-->

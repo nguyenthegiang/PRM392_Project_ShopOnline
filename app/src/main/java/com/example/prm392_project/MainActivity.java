@@ -198,17 +198,13 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
 
         //set event for buttons
         Button viewDetailBtn = layout.findViewById(R.id.btnViewDetailMain);
-        Button editBtn = layout.findViewById(R.id.btnEditProductMain);
+        Button addToCartBtn = layout.findViewById(R.id.btnAddToCartMain);
 
         //Edit product
-        editBtn.setOnClickListener(new View.OnClickListener() {
+        addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //go to EditProductActivity
-                Intent intent = new Intent(MainActivity.this, EditProductActivity.class);
-                //pass the chosen product
-                intent.putExtra("product", productModel);
-                startActivity(intent);
+                //todo: go to ViewCart activity
             }
         });
 
