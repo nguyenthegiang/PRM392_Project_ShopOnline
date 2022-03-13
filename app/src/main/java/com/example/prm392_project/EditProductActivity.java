@@ -37,6 +37,9 @@ public class EditProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_product);
+
+        setTitle("Edit Product");
+
         //get Views
         editTextName = findViewById(R.id.editTextNameEdit);
         editTextPrice = findViewById(R.id.editTextPriceEdit);
