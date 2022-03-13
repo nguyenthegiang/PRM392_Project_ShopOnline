@@ -102,8 +102,8 @@ public class AddProductActivity extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 //notify
                 Toast.makeText(AddProductActivity.this, "Product added successfully", Toast.LENGTH_SHORT).show();
-                //back to main activity
-                Intent intent = new Intent(AddProductActivity.this, MainActivity.class);
+                //back to manage product activity
+                Intent intent = new Intent(AddProductActivity.this, ManageProductActivity.class);
                 startActivity(intent);
                 finish();
             }

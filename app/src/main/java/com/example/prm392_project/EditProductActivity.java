@@ -121,7 +121,7 @@ public class EditProductActivity extends AppCompatActivity {
                         //notify
                         Toast.makeText(EditProductActivity.this, "Product updated", Toast.LENGTH_SHORT).show();
                         //move to mainActivity
-                        startActivity(new Intent(EditProductActivity.this, MainActivity.class));
+                        startActivity(new Intent(EditProductActivity.this, ManageProductActivity.class));
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
