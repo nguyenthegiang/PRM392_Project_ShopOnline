@@ -7,6 +7,7 @@ import android.os.Parcelable;
 //Implement Parcelable for performing CRUD actions with DB
 public class CartModel implements Parcelable {
     //fields
+    String cartId;
     String userId;
     String productId;
     int amount;
@@ -16,13 +17,15 @@ public class CartModel implements Parcelable {
     public CartModel() {
     }
 
-    public CartModel(String userId, String productId, int amount) {
+    public CartModel(String cartId, String userId, String productId, int amount) {
+        this.cartId = cartId;
         this.userId = userId;
         this.productId = productId;
         this.amount = amount;
     }
 
     protected CartModel(Parcel in) {
+        cartId = in.readString();
         userId = in.readString();
         productId = in.readString();
         amount = in.readInt();
@@ -39,6 +42,14 @@ public class CartModel implements Parcelable {
             return new CartModel[size];
         }
     };
+
+    public String getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(String cartId) {
+        this.cartId = cartId;
+    }
 
     public String getUserId() {
         return userId;
@@ -71,6 +82,7 @@ public class CartModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(cartId);
         dest.writeString(userId);
         dest.writeString(productId);
         dest.writeInt(amount);

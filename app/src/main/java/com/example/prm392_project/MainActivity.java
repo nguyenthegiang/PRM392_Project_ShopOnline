@@ -19,8 +19,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.prm392_project.Model.CartModel;
 import com.example.prm392_project.Model.ProductModel;
 import com.example.prm392_project.Utils.ProductRVAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -220,8 +223,32 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
         addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo: add product to Cart (amount = 1, default)
+                /*add product to Cart (amount = 1, default)
+                * if click multiple times: not add many times*/
 
+                //create model
+                CartModel cart = new CartModel();
+                cart.setUserId(userId);
+                cart.setProductId(productModel.getId());
+                cart.setAmount(1);
+                //generate cartId: = userId + productId
+                cart.setCartId(userId + productModel.getId());
+
+                //add to database
+                cartReference.child(cart.getCartId()).setValue(cart).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    //Success
+                    @Override
+                    public void onSuccess(Void unused) {
+                        //Success: notify
+                        Toast.makeText(MainActivity.this, "Add to Cart successfully", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Fail: notify
+                        Toast.makeText(MainActivity.this, "Add to Cart failed" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
