@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.prm392_project.Model.CartModel;
 import com.example.prm392_project.Utils.CartRVAdapter;
@@ -120,8 +121,15 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
         });
     }
 
+    //method from Interface: Handle when Click [Delete] in a Cart
     @Override
     public void onDeleteCartClick(int position) {
-
+        //get cart to delete
+        CartModel cart = cartModelArrayList.get(position);
+        //delete in DB
+        DatabaseReference databaseReference = firebaseDatabase.getReference("Carts").child(cart.getCartId());
+        databaseReference.removeValue();
+        //notify
+        Toast.makeText(this, "Cart deleted", Toast.LENGTH_SHORT).show();
     }
 }
