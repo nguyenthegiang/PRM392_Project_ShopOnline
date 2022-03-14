@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-
+/*Adapter for Recycler View of Products*/
 public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.ViewHolder> {
     private ArrayList<ProductModel> productModelArrayList;    //list products
     private Context context;
