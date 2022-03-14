@@ -8,6 +8,7 @@
 
     <!--Display Total Price-->
     <androidx.cardview.widget.CardView
+        android:id="@+id/totalCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,6 +72,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/totalCardView"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="30dp"
+
+        tools:listitem="@layout/cart_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>
