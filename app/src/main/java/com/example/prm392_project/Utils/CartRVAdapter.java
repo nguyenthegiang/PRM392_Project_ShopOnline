@@ -55,7 +55,7 @@ public class CartRVAdapter extends RecyclerView.Adapter<CartRVAdapter.ViewHolder
         holder.BtnCartDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteCartClickInterface.onCartClick(position);
+                deleteCartClickInterface.onDeleteCartClick(position);
             }
         });
     }
@@ -91,6 +91,6 @@ public class CartRVAdapter extends RecyclerView.Adapter<CartRVAdapter.ViewHolder
 
     //creating an interface for on click
     public interface DeleteCartClickInterface {
-        void onCartClick(int position);
+        void onDeleteCartClick(int position);
     }
 }
