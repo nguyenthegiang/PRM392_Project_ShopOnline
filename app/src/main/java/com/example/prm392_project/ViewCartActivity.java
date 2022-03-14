@@ -73,6 +73,9 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
         if (user != null) {
             userId = user.getUid();
         }
+
+        //remove loading spinner (if not have any cart in list)
+        loadingPB.setVisibility(View.GONE);
         super.onStart();
     }
 
@@ -124,7 +127,7 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                loadingPB.setVisibility(View.GONE);
             }
         });
     }
