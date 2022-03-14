@@ -156,6 +156,9 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
         switch (id) {
             //ShowCart -> go to ViewCart Activity
             case R.id.menuShowCart: {
+                Intent i = new Intent(MainActivity.this, ViewCartActivity.class);
+                startActivity(i);
+                this.finish();
                 return true;
             }
 

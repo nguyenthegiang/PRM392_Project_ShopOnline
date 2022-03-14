@@ -156,10 +156,13 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
         switch (id) {
             //ShowCart -> go to ViewCart Activity
             case R.id.menuShowCart: {
+                Intent i = new Intent(ManageProductActivity.this, ViewCartActivity.class);
+                startActivity(i);
+                this.finish();
                 return true;
             }
 
-            //Shop -> do nothing
+            //Shop -> go to MainActivity
             case R.id.menuShop: {
                 //move to MainActivity
                 Intent i = new Intent(ManageProductActivity.this, MainActivity.class);
