@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,7 +47,7 @@ public class CartRVAdapter extends RecyclerView.Adapter<CartRVAdapter.ViewHolder
     public void onBindViewHolder(@NonNull CartRVAdapter.ViewHolder holder, int position) {
         //set data to recycler view item
         CartModel cartModel = cartModelArrayList.get(position);    //get data by position
-        holder.TVcartAmount.setText(cartModel.getAmount());
+        holder.TVcartAmount.setText(String.valueOf(cartModel.getAmount()));
         holder.TVcartUnitPrice.setText("$ "+ cartModel.getUnitPrice());
         holder.TVcartProductName.setText(cartModel.getProductId()); //productId is also ProductName
         //set animation
@@ -77,7 +78,7 @@ public class CartRVAdapter extends RecyclerView.Adapter<CartRVAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //data of a Cart
         private TextView TVcartAmount, TVcartUnitPrice, TVcartProductName;
-        private Button BtnCartDelete;
+        private ImageButton BtnCartDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
