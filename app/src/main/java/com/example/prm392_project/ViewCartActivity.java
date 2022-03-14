@@ -41,6 +41,7 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
     private CartRVAdapter cartRVAdapter;
 
     private String userId;
+    private int totalPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
         RVCart.setLayoutManager(new LinearLayoutManager(this));
         RVCart.setAdapter(cartRVAdapter);
 
-        //fetch carts data from DB
+        //fetch carts data from DB, display total price
         getCarts();
     }
 
@@ -75,7 +76,7 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
         super.onStart();
     }
 
-    //fetch carts data from DB
+    //fetch carts data from DB, display total price
     private void getCarts() {
         //clear list
         cartModelArrayList.clear();
@@ -91,6 +92,10 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
                 if (cart.getUserId().equals(userId)) {
                     cartModelArrayList.add(cart);
                 }
+
+                //Update Display Total Price
+                totalPrice += cart.getUnitPrice() * cart.getAmount();
+                TVcartTotalAmount.setText("$ " + totalPrice);
 
                 //notify adapter
                 cartRVAdapter.notifyDataSetChanged();
