@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/btnCheckOutCart"
                 android:layout_toLeftOf="@id/btnCheckOutCart"
-                android:text="$1"
+                android:text="$0"
                 android:textSize="25sp"
                 android:padding="4dp"
                 android:layout_margin="3dp"
@@ -60,10 +60,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="Check Out"
-                android:textSize="20dp"
                 android:background="@drawable/rounded_button_corner"
-                android:textAllCaps="false"/>
+                android:onClick="onCheckOutClick"
+                android:text="Check Out"
+                android:textAllCaps="false"
+                android:textSize="20dp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

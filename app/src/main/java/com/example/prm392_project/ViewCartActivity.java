@@ -198,4 +198,21 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
             }
         }
     }
+
+    //Click Check Out
+    public void onCheckOutClick(View view) {
+        //Check out -> Delete all item in this Cart list
+        for (CartModel cart: cartModelArrayList) {
+            //delete in DB
+            DatabaseReference databaseReference = firebaseDatabase.getReference("Carts").child(cart.getCartId());
+            databaseReference.removeValue();
+        }
+
+        //notify
+        Toast.makeText(this, "Check out successfully", Toast.LENGTH_SHORT).show();
+
+        //reload Activity to reset values in List Cart & Total
+        finish();
+        startActivity(getIntent());
+    }
 }
