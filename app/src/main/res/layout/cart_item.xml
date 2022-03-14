@@ -73,7 +73,6 @@
             android:layout_alignParentRight="true"
             tools:srcCompat="@drawable/ic_delete"
             android:background="@drawable/outline_button"/>
-
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

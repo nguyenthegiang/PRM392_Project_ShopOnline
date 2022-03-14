@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,14 +21,14 @@ import java.util.ArrayList;
 public class CartRVAdapter extends RecyclerView.Adapter<CartRVAdapter.ViewHolder> {
     private ArrayList<CartModel> cartModelArrayList;    //list carts
     private Context context;
-    private CartClickInterface cartClickInterface;
+    private DeleteCartClickInterface deleteCartClickInterface;
     int lastPos = -1;  //position
 
     //constructor
-    public CartRVAdapter(ArrayList<CartModel> cartModelArrayList, Context context, CartClickInterface cartClickInterface) {
+    public CartRVAdapter(ArrayList<CartModel> cartModelArrayList, Context context, DeleteCartClickInterface deleteCartClickInterface) {
         this.cartModelArrayList = cartModelArrayList;
         this.context = context;
-        this.cartClickInterface = cartClickInterface;
+        this.deleteCartClickInterface = deleteCartClickInterface;
     }
 
     //read layout file and bind each item in file to each item in ViewHolder
@@ -50,7 +51,13 @@ public class CartRVAdapter extends RecyclerView.Adapter<CartRVAdapter.ViewHolder
         holder.TVcartProductName.setText(cartModel.getProductId()); //productId is also ProductName
         //set animation
         setAnimation(holder.itemView, position);
-        //todo: continue here
+        //when user click Delete button -> call event
+        holder.BtnCartDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteCartClickInterface.onCartClick(position);
+            }
+        });
     }
 
     //animation for item: slide from the left when load
@@ -70,6 +77,7 @@ public class CartRVAdapter extends RecyclerView.Adapter<CartRVAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //data of a Cart
         private TextView TVcartAmount, TVcartUnitPrice, TVcartProductName;
+        private Button BtnCartDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,11 +85,12 @@ public class CartRVAdapter extends RecyclerView.Adapter<CartRVAdapter.ViewHolder
             TVcartAmount = itemView.findViewById(R.id.cartAmount);
             TVcartUnitPrice = itemView.findViewById(R.id.cartUnitPrice);
             TVcartProductName = itemView.findViewById(R.id.cartProductName);
+            BtnCartDelete = itemView.findViewById(R.id.cartBtnDelete);
         }
     }
 
     //creating an interface for on click
-    public interface CartClickInterface {
+    public interface DeleteCartClickInterface {
         void onCartClick(int position);
     }
 }
