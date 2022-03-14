@@ -67,12 +67,12 @@
         <!--button for Delete-->
         <ImageButton
             android:id="@+id/cartBtnDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            tools:srcCompat="@drawable/ic_cart"
-            />
+            tools:srcCompat="@drawable/ic_delete"
+            android:background="@drawable/outline_button"/>
 
     </RelativeLayout>
 
