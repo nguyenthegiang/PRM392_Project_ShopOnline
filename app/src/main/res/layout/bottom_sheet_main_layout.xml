@@ -70,6 +70,7 @@
             android:layout_margin="6dp"
             android:layout_weight="1"
             android:text="Add to Cart"
+            android:backgroundTint="@color/pale"
             android:textAllCaps="false"/>
 
         <!--Button for Product Detail-->
@@ -80,6 +81,7 @@
             android:layout_margin="6dp"
             android:layout_weight="1"
             android:text="View Detail"
+            android:backgroundTint="@color/darkTan"
             android:textAllCaps="false"/>
     </LinearLayout>
 
