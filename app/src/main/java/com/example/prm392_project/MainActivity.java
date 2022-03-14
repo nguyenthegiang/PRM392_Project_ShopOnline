@@ -224,13 +224,15 @@ public class MainActivity extends AppCompatActivity implements ProductRVAdapter.
             @Override
             public void onClick(View v) {
                 /*add product to Cart (amount = 1, default)
-                * if click multiple times: not add many times*/
+                  if click multiple times: not add many times*/
 
                 //create model
                 CartModel cart = new CartModel();
                 cart.setUserId(userId);
                 cart.setProductId(productModel.getId());
                 cart.setAmount(1);
+                //unit price is current price of product
+                cart.setUnitPrice(productModel.getPrice());
                 //generate cartId: = userId + productId
                 cart.setCartId(userId + productModel.getId());
 
