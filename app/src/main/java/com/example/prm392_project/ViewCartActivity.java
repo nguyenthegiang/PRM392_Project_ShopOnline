@@ -131,5 +131,9 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
         databaseReference.removeValue();
         //notify
         Toast.makeText(this, "Cart deleted", Toast.LENGTH_SHORT).show();
+
+        //reload Activity to reset values in List Cart & Total
+        finish();
+        startActivity(getIntent());
     }
 }
