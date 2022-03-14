@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -135,5 +138,59 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
         //reload Activity to reset values in List Cart & Total
         finish();
         startActivity(getIntent());
+    }
+
+    //Create the Appbar menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Create menu (appbar) from layout
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //click listener for Appbar (Action Bar)
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            //ShowCart -> do nothing
+            case R.id.menuShowCart: {
+                return true;
+            }
+
+            //Shop -> do nothing
+            case R.id.menuShop: {
+                //move to Main Activity
+                Intent i = new Intent(ViewCartActivity.this, MainActivity.class);
+                startActivity(i);
+                this.finish();
+                return true;
+            }
+
+            //Manage Product -> go to ManageProduct Activity
+            case R.id.menuManageProduct: {
+                Intent i = new Intent(ViewCartActivity.this, ManageProductActivity.class);
+                startActivity(i);
+                this.finish();
+                return true;
+            }
+
+            //Log out
+            case R.id.menuLogOut: {
+                //notify
+                Toast.makeText(getApplicationContext(), "Logged out", Toast.LENGTH_SHORT).show();
+                //log out in server
+                mAuth.signOut();
+                //move to Login Activity
+                Intent i = new Intent(ViewCartActivity.this, LoginActivity.class);
+                startActivity(i);
+                this.finish();
+                return true;
+            }
+
+            default: {
+                return super.onOptionsItemSelected(item);
+            }
+        }
     }
 }
