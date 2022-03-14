@@ -11,5 +11,7 @@
     <color name="darkGreen">#4C936F</color>
     <color name="darkestGreen">#485E48</color>
     <color name="orange">#FEA71C</color>
-    <color name="pale">#FEF4E5</color>
+    <color name="pale">#fff3e0</color>
+    <color name="tan">#ffe4ba</color>
+    <color name="darkTan">#ffeed4</color>
 </resources>
