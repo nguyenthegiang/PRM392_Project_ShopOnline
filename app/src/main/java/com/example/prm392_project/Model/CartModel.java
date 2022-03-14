@@ -11,17 +11,19 @@ public class CartModel implements Parcelable {
     String userId;
     String productId;
     int amount;
+    int unitPrice;
 
     //getter, setter, constructor
 
     public CartModel() {
     }
 
-    public CartModel(String cartId, String userId, String productId, int amount) {
+    public CartModel(String cartId, String userId, String productId, int amount, int unitPrice) {
         this.cartId = cartId;
         this.userId = userId;
         this.productId = productId;
         this.amount = amount;
+        this.unitPrice = unitPrice;
     }
 
     protected CartModel(Parcel in) {
@@ -29,6 +31,7 @@ public class CartModel implements Parcelable {
         userId = in.readString();
         productId = in.readString();
         amount = in.readInt();
+        unitPrice = in.readInt();
     }
 
     public static final Creator<CartModel> CREATOR = new Creator<CartModel>() {
@@ -75,6 +78,14 @@ public class CartModel implements Parcelable {
         this.amount = amount;
     }
 
+    public int getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(int unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -86,5 +97,6 @@ public class CartModel implements Parcelable {
         dest.writeString(userId);
         dest.writeString(productId);
         dest.writeInt(amount);
+        dest.writeInt(unitPrice);
     }
 }
