@@ -3,6 +3,7 @@ package com.example.prm392_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,5 +44,10 @@ public class ProductDetailActivity extends AppCompatActivity {
             //Product Image: Display with Picasso
             Picasso.get().load(productModel.getImageURL()).into(imageViewImageDetail);
         }
+    }
+
+    //Event click Add to Cart button
+    public void onAddToCartClick(View view) {
+        
     }
 }
