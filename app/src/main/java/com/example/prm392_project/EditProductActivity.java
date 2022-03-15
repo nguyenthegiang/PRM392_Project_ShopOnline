@@ -1,8 +1,11 @@
 package com.example.prm392_project;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -72,10 +75,27 @@ public class EditProductActivity extends AppCompatActivity {
                 loadingPB.setVisibility(View.VISIBLE);
 
                 //get input data
-                String productName = editTextName.getText().toString();
-                int productPrice = Integer.parseInt(editTextPrice.getText().toString());
-                String productDescription = editTextDescription.getText().toString();
-                String productImageURL = editTextImageURL.getText().toString();
+                String productName = "";
+                int productPrice = 0;
+                String productDescription = "";
+                String productImageURL = "";
+
+                //Validation: no value is empty or wrong format
+                try {
+                    productName = editTextName.getText().toString().trim();
+                    productPrice = Integer.parseInt(editTextPrice.getText().toString().trim());
+                    productDescription = editTextDescription.getText().toString().trim();
+                    productImageURL = editTextImageURL.getText().toString().trim();
+
+                    if (productName.isEmpty() || productPrice <= 0 || productDescription.isEmpty() || productImageURL.isEmpty()) {
+                        throw new Exception();
+                    }
+                } catch (Exception ex) {
+                    //notify
+                    showAlertDialog();
+                    loadingPB.setVisibility(View.GONE);
+                    return;
+                }
 
                 //create a map for passing data to DB using key & value pair
                 Map<String, Object> map = new HashMap<>();
@@ -154,5 +174,27 @@ public class EditProductActivity extends AppCompatActivity {
         //move to mainActivity
         Intent intent = new Intent(EditProductActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    //Show Alert Dialog for to screen
+    private void showAlertDialog() {
+        //create dialog = builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Input not allowed"); //title
+        builder.setMessage("Please fill in all fields with correct format!"); //message
+        builder.setIcon(android.R.drawable.ic_dialog_alert);//icon
+
+        //add button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+            }
+        });
+
+        //show dialog
+        Dialog dialog = builder.create();
+
+        dialog.show();
     }
 }
