@@ -1,8 +1,11 @@
 package com.example.prm392_project;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -59,10 +62,28 @@ public class AddProductActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         //get data from input
-        String name = editTextName.getText().toString().trim();
-        int price = Integer.parseInt(editTextPrice.getText().toString().trim());
-        String description = editTextDescription.getText().toString().trim();
-        String imageURL = editTextImageURL.getText().toString().trim();
+        String name = "";
+        int price = 0;
+        String description = "";
+        String imageURL = "";
+
+        //Validation: no value is empty or wrong format
+        try {
+            name = editTextName.getText().toString().trim();
+            price = Integer.parseInt(editTextPrice.getText().toString().trim());
+            description = editTextDescription.getText().toString().trim();
+            imageURL = editTextImageURL.getText().toString().trim();
+
+            if (name.isEmpty() || price <= 0 || description.isEmpty() || imageURL.isEmpty()) {
+                throw new Exception();
+            }
+        } catch (Exception ex) {
+            //notify
+            showAlertDialog();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
         //id generated from name
         productId = name;
         //SellerID is id of the current user
@@ -116,5 +137,27 @@ public class AddProductActivity extends AppCompatActivity {
 
         //hide loading
         progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    //Show Alert Dialog for to screen
+    private void showAlertDialog() {
+        //create dialog = builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Input not allowed"); //title
+        builder.setMessage("Please fill in all fields with correct format!"); //message
+        builder.setIcon(android.R.drawable.ic_dialog_alert);//icon
+
+        //add button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+            }
+        });
+
+        //show dialog
+        Dialog dialog = builder.create();
+
+        dialog.show();
     }
 }

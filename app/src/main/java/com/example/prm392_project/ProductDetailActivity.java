@@ -94,7 +94,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             amount = 0;
         }
 
-        //if amount = 0 => not allow -> show alert & return
+        //Validation: if amount = 0 => not allow -> show alert & return
         if (amount == 0) {
             showAlertDialog();
             return;
