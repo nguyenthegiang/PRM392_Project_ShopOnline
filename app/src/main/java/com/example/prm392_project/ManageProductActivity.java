@@ -29,6 +29,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
     private RecyclerView RVProduct;
     private ProgressBar loadingPB;
     private RelativeLayout RLManageProduct;
+    private TextView TVNoProduct;
     //for list product
     private ArrayList<ProductModel> productModelArrayList;
     private ProductRVAdapter productRVAdapter;
@@ -58,6 +60,7 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
         RVProduct = findViewById(R.id.RVManageProductList);
         RLManageProduct = findViewById(R.id.RLManageProduct);
         loadingPB = findViewById(R.id.progressBarManageProduct);
+        TVNoProduct = findViewById(R.id.TVNoProduct);
         //firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -88,10 +91,15 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
     private void getProducts() {
         //clear list
         productModelArrayList.clear();
+
         //read data from DB
         databaseReference.addChildEventListener(new ChildEventListener() {
+            private int childCount = 0; // Counter to keep track of children
+
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                childCount++;
+
                 //hide progress bar
                 loadingPB.setVisibility(View.GONE);
 
@@ -103,6 +111,11 @@ public class ManageProductActivity extends AppCompatActivity implements ProductR
 
                 //notify adapter
                 productRVAdapter.notifyDataSetChanged();
+
+                //if all children have been processed but the list is still empty => Display Message to notify
+                if (childCount == snapshot.getChildrenCount() && productModelArrayList.size() == 0) {
+                    TVNoProduct.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
