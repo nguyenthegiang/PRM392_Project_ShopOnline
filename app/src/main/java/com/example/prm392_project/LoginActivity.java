@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                //hide progress bả
+                //hide progress bar
                 progressBar.setVisibility(View.INVISIBLE);
                 //check result
                 if (task.isSuccessful()) {

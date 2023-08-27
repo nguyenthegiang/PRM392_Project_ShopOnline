@@ -40,7 +40,7 @@
 
             <!--TextView to display Total-->
             <TextView
-                android:id="@+id/TVcartTotalAmount"
+                android:id="@+id/TVCartTotalAmount"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/btnCheckOutCart"

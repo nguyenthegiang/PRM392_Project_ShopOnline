@@ -33,7 +33,7 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
     DatabaseReference cartReference;
     FirebaseAuth mAuth;
     //Views
-    TextView TVcartTotalAmount;
+    TextView TVCartTotalAmount;
     RecyclerView RVCart;
     ProgressBar loadingPB;
     //for list Cart
@@ -41,7 +41,7 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
     private CartRVAdapter cartRVAdapter;
 
     private String userId;
-    private int totalPrice;
+    private int totalPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
         setContentView(R.layout.activity_view_cart);
 
         //get Views
-        TVcartTotalAmount = findViewById(R.id.TVcartTotalAmount);
+        TVCartTotalAmount = findViewById(R.id.TVCartTotalAmount);
         RVCart = findViewById(R.id.RVCart);
         loadingPB = findViewById(R.id.progressBarViewCart);
         //firebase
@@ -94,11 +94,11 @@ public class ViewCartActivity extends AppCompatActivity implements CartRVAdapter
                 CartModel cart = snapshot.getValue(CartModel.class);
                 if (cart.getUserId().equals(userId)) {
                     cartModelArrayList.add(cart);
-                }
 
-                //Update Display Total Price
-                totalPrice += cart.getUnitPrice() * cart.getAmount();
-                TVcartTotalAmount.setText("$ " + totalPrice);
+                    //Update Display Total Price
+                    totalPrice += cart.getUnitPrice() * cart.getAmount();
+                    TVCartTotalAmount.setText("$ " + totalPrice);
+                }
 
                 //notify adapter
                 cartRVAdapter.notifyDataSetChanged();
